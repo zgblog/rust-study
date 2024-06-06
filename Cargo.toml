@@ -59,3 +59,7 @@ path = "src/bin/cargo/doc_test.rs"
 [[bin]]
 name = "box"
 path = "src/bin/smartpointer/box_test.rs"
+
+[[bin]]
+name = "deref"
+path = "src/bin/smartpointer/deref_test.rs"
