@@ -55,3 +55,7 @@ path = "src/bin/closures/iter_test.rs"
 [[bin]]
 name = "doc"
 path = "src/bin/cargo/doc_test.rs"
+
+[[bin]]
+name = "box"
+path = "src/bin/smartpointer/box_test.rs"
