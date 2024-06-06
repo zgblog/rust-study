@@ -1,0 +1,57 @@
+[package]
+name = "study"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8.5"
+
+[[bin]]
+name = "vector"
+path = "src/bin/collect/vector_test.rs"
+
+[[bin]]
+name = "string"
+path = "src/bin/collect/string_test.rs"
+
+[[bin]]
+name = "map"
+path = "src/bin/collect/map_test.rs"
+
+[[bin]]
+name = "panic"
+path = "src/bin/error/panic_test.rs"
+
+[[bin]]
+name = "result"
+path = "src/bin/error/result_test.rs"
+
+
+[[bin]]
+name = "gen"
+path = "src/bin/generics/gen_test.rs"
+
+[[bin]]
+name = "trait"
+path = "src/bin/generics/trait_test.rs"
+
+[[bin]]
+name = "lifetime"
+path = "src/bin/generics/lifetime_test.rs"
+
+[[bin]]
+name = "command"
+path = "src/bin/io/command.rs"
+
+[[bin]]
+name = "closure"
+path = "src/bin/closures/closure_test.rs"
+
+[[bin]]
+name = "iter"
+path = "src/bin/closures/iter_test.rs"
+
+
+[[bin]]
+name = "doc"
+path = "src/bin/cargo/doc_test.rs"
