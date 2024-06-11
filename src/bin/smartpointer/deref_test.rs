@@ -2,6 +2,7 @@ fn main() {
     deref_test1();
     deref_test2();
     deref_test3();
+    deref_test4();
 }
 
 fn deref_test1() {
@@ -45,4 +46,14 @@ fn deref_test3() {
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
+}
+
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn deref_test4() {
+    let m = MyBox::new(String::from("Rust"));
+    // 自动的强制类型转换
+    hello(&m);
 }

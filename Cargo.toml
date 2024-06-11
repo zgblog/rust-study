@@ -63,3 +63,19 @@ path = "src/bin/smartpointer/box_test.rs"
 [[bin]]
 name = "deref"
 path = "src/bin/smartpointer/deref_test.rs"
+
+[[bin]]
+name = "drop"
+path = "src/bin/smartpointer/drop_test.rs"
+
+[[bin]]
+name = "rc"
+path = "src/bin/smartpointer/rc_test.rs"
+
+[[bin]]
+name = "refcell"
+path = "src/bin/smartpointer/refcell_test.rs"
+
+[[bin]]
+name = "mem_leak"
+path = "src/bin/smartpointer/mem_leak.rs"
