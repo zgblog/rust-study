@@ -79,3 +79,7 @@ path = "src/bin/smartpointer/refcell_test.rs"
 [[bin]]
 name = "mem_leak"
 path = "src/bin/smartpointer/mem_leak.rs"
+
+[[bin]]
+name = "thread"
+path = "src/bin/concurrent/thread_test.rs"

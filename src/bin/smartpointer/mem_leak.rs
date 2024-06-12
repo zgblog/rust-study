@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::rc::{Rc, Weak};
 use std::cell::RefCell;
 use crate::List::{Cons, Nil};
 
@@ -46,6 +46,7 @@ fn mem_leak_1() {
 struct Node {
     value: i32,
     children: RefCell<Vec<Rc<Node>>>,
+    // 父节点是弱引用，消除了内存泄漏
     parent: RefCell<Weak<Node>>,
 }
 
@@ -56,6 +57,8 @@ fn mem_leak_2() {
         parent: RefCell::new(Weak::new()),
     });
 
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+
     let branch = Rc::new(Node {
         value: 5,
         children: RefCell::new(vec![Rc::clone(&leaf)]),
@@ -64,10 +67,56 @@ fn mem_leak_2() {
 
     *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
 
-    println!("leaf parent = {:?}", leaf.parent
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
 
+}
+
+fn mem_leak_3() {
+    // 子节点
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+
+    println!("leaf strong = {}, weak = {}",
+             Rc::strong_count(&leaf),
+             Rc::weak_count(&leaf),
+             );
+
+    {
+        // 在子作用域中创建父节点
+        let branch = Rc::new(Node {
+            value: 5,
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![Rc::clone(&leaf)]),
+        });
+        // 设置指向
+
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+        println!("branch strong = {}, weak = {}",
+                 Rc::strong_count(&branch),
+                 Rc::weak_count(&branch),
+                 );
+
+        println!("leaf strong = {}, weak = {}",
+                 Rc::strong_count(&leaf),
+                 Rc::weak_count(&leaf),
+                 );
+
+    }
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+
+    println!("leaf strong = {}, weak = {}",
+             Rc::strong_count(&leaf),
+             Rc::weak_count(&leaf),
+             );
 }
 
 fn main() {
     mem_leak_1();
+    mem_leak_2();
+    mem_leak_3();
 }
